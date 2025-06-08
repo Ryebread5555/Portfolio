@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&family=Quicksand:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* global css */
+html, body {
+  overflow-x: hidden;
+}
+body,
+#root,
+.app {
+  height: 100%;
+}
