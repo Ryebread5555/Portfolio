@@ -1,11 +1,11 @@
-import React from 'react';
 import AppContainer from './pages/AppContainer';
+import ThemeContext from './hooks/useThemeContext';
 
 function App() {
   return (
-    <div className="App">
-      <AppContainer />
-    </div>
+    <ThemeContext>
+        <AppContainer />
+    </ThemeContext>
   );
 }
 
