@@ -4,7 +4,7 @@ import ParallaxSection from '../components/ParallaxSection';
 
 const About = ({}) => {
   return (
-    <ParallaxSection id="about">
+    <ParallaxSection id="about" className="scroll-mt-20 ...">
       <section className="lg:flex md:justify-between md:items-center lg:h-full gap-16 py-5">
         {/* IMAGE - Right side on desktop, top on mobile */}
         <div className="md:order-2 flex justify-center lg:justify-end basis-4/6 z-10 mt-16 md:mt-32 mb-10 md:mb-24">
