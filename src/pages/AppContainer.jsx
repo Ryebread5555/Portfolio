@@ -6,19 +6,12 @@ import Projects from './Projects';
 import Resume from './Resume';
 
 const AppContainer = () => {
-  // track current active page
   const [activePage, setActivePage] = useState('about');
-  // detect if user is at the top of the page
   const [topOfPage, setTopOfPage] = useState(true);
 
-  // detect scroll position for nav styling
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY === 0) {
-        setTopOfPage(true);
-      } else {
-        setTopOfPage(false);
-      }
+      setTopOfPage(window.scrollY === 0);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -27,28 +20,26 @@ const AppContainer = () => {
 
   return (
     <div className="overflow-x-hidden scroll-smooth">
-      {/* NavBar gets scroll states */}
       <NavBar
         topOfPage={topOfPage}
         activePage={activePage}
         setActivePage={setActivePage}
       />
 
-      {/* Page content container */}
       <div className="w-4/6 mx-auto">
-        <section id="about" className="w-full mx-auto mb-1">
+        <section id="about" className="w-full mx-auto mb-1 scroll-mt-20">
           <About setActivePage={setActivePage} />
         </section>
 
-        <section id="projects" className="w-full mx-auto mt-16">
+        <section id="projects" className="w-full mx-auto mt-16 scroll-mt-20">
           <Projects />
         </section>
 
-        <section id="resume" className="w-full mx-auto md:h-full">
+        <section id="resume" className="w-full mx-auto md:h-full scroll-mt-20">
           <Resume />
         </section>
 
-        <section id="contact" className="w-5/6 mx-auto md:h-full">
+        <section id="contact" className="w-5/6 mx-auto md:h-full scroll-mt-20">
           <Contact />
         </section>
       </div>
