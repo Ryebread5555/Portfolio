@@ -1,12 +1,12 @@
 import AppContainer from './pages/AppContainer';
-import ThemeContext from './hooks/useThemeContext';
+import { ThemeProvider } from './hooks/useThemeContext';
 
-function App() {
+function RootApp() {
   return (
-    <ThemeContext>
-        <AppContainer />
-    </ThemeContext>
+    <ThemeProvider>
+      <AppContainer />
+    </ThemeProvider>
   );
 }
 
-export default App;
+export default RootApp;

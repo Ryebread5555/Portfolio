@@ -12,10 +12,20 @@ module.exports = {
       },
       fontSize: {
         custom: '32px',
-        sm: '1.2rem',
+        xl: '40px',
+        xxl: '48px',
       },
       scale: {
         '-100': '-1',
+      },
+      keyframes: {
+        fadeInUp: {
+          '0%': { opacity: 0, transform: 'translateY(10px)' },
+          '100%': { opacity: 1, transform: 'translateY(0)' },
+        },
+      },
+      animation: {
+        'fade-in-up': 'fadeInUp 0.3s ease forwards',
       },
     },
     screens: {
@@ -29,5 +39,3 @@ module.exports = {
   },
   plugins: [],
 };
-
-
