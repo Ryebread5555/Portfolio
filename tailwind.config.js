@@ -6,6 +6,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      maxWidth: {
+        'card': '350px',
+      },
       fontFamily: {
         montserrat: ['Montserrat', 'sans-serif'],
         quicksand: ['Quicksand', 'sans-serif'],
