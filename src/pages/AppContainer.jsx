@@ -26,22 +26,24 @@ const AppContainer = () => {
         setActivePage={setActivePage}
       />
 
-      <div className="w-4/6 mx-auto">
+      <div className="w-full mx-auto px-4 md:px-8">
         <section id="about" className="w-full mx-auto mb-1 scroll-mt-20">
           <About setActivePage={setActivePage} />
         </section>
 
-        <section id="projects" className="w-full mx-auto mt-16 scroll-mt-20">
-          <Projects />
-        </section>
+        <div className="w-full max-w-6xl mx-auto px-4 md:px-8">
+          <section id="projects" className="w-full mx-auto mt-16 scroll-mt-20">
+            <Projects />
+          </section>
 
-        <section id="resume" className="w-full mx-auto md:h-full scroll-mt-20">
-          <Resume />
-        </section>
+          <section id="resume" className="w-full mx-auto md:h-full scroll-mt-20">
+            <Resume />
+          </section>
 
-        <section id="contact" className="w-5/6 mx-auto md:h-full scroll-mt-20">
-          <Contact />
-        </section>
+          <section id="contact" className="w-full mx-auto md:h-full scroll-mt-20">
+            <Contact />
+          </section>
+        </div>
       </div>
     </div>
   );
