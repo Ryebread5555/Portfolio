@@ -81,13 +81,13 @@ const container = {
 
 const Projects = () => {
   return (
-    <ParallaxSection id="projects" className="bg-gradient-to-b from-gray-100 to-white py-16">
+    <ParallaxSection id="projects">
   <motion.div
-    className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-4"
     variants={container}
     initial="hidden"
     whileInView="visible"
     viewport={{ once: true }}
+    className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
   >
     {projects.map((project) => (
       <ProjectCard key={project.id} {...project} />
