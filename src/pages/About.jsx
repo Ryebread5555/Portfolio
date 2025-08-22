@@ -1,24 +1,42 @@
 import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import profilePic from '../assets/Profile-pic.jpg';
 import ParallaxSection from '../components/ParallaxSection';
 
 const About = () => {
-  // Add media query check for desktop
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 1024;
+  // Add proper responsive state with resize listener
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    // Function to check if screen is desktop size
+    const checkIsDesktop = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    // Set initial value
+    checkIsDesktop();
+
+    // Add resize listener
+    window.addEventListener('resize', checkIsDesktop);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener('resize', checkIsDesktop);
+  }, []);
 
   return (
-    <ParallaxSection id="about" className="scroll-mt-28">
+    <ParallaxSection id="about" className="">
       <section 
         className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-6 lg:gap-16 mx-auto px-4 sm:px-6 lg:px-8 min-h-screen"
         style={{
           display: 'flex',
           flexDirection: isDesktop ? 'row' : 'column',
-          alignItems: isDesktop ? 'flex-start' : 'center',
+          alignItems: isDesktop ? 'center' : 'center',
           justifyContent: 'space-between',
           gap: isDesktop ? '64px' : '24px',
           minHeight: '100vh',
           backgroundColor: 'lightblue',
-          padding: '16px'
+          padding: '16px',
+          transition: 'all 0.3s ease-in-out'
         }}
       >
         
@@ -40,7 +58,8 @@ const About = () => {
             justifyContent: isDesktop ? 'flex-start' : 'center',
             backgroundColor: 'lightgreen',
             padding: '8px',
-            border: '3px solid green'
+            border: '3px solid green',
+            transition: 'all 0.3s ease-in-out'
           }}
         >
           <img
@@ -57,7 +76,7 @@ const About = () => {
             }}
           />
         </motion.div>
-
+        
         {/* TEXT CONTENT - right side on desktop, bottom on mobile */}
         <motion.div
           initial="hidden"
@@ -78,19 +97,36 @@ const About = () => {
           }}
           className="flex-1 order-2 lg:order-2 lg:flex-1 lg:flex-grow w-full lg:w-auto"
           style={{ 
-            flex: '1 1 auto',
+            flex: '0 0 auto',
             order: 2,
             display: 'flex',
             flexDirection: 'column',
             backgroundColor: 'lightyellow',
-            padding: '8px',
+            padding: '4px',
             border: '3px solid orange',
             justifyContent: isDesktop ? 'center' : 'flex-start',
-            alignItems: isDesktop ? 'center' : 'stretch'
+            alignItems: isDesktop ? 'center' : 'stretch',
+            transition: 'all 0.3s ease-in-out',
+            width: 'fit-content',
+            height: 'fit-content'
           }}
         >
           {/* Text Box Container */}
-          <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 border border-gray-100 max-w-xs sm:max-w-sm lg:max-w-md mx-auto lg:mx-0">
+          <div 
+            className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 border border-gray-100 mx-auto lg:mx-0"
+            style={{
+              width: isDesktop ? '320px' : '280px',
+              height: isDesktop ? '320px' : '280px',
+              minWidth: isDesktop ? '320px' : '280px',
+              minHeight: isDesktop ? '320px' : '280px',
+              maxWidth: isDesktop ? '320px' : '280px',
+              maxHeight: isDesktop ? '320px' : '280px',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
             <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-center lg:text-center">
               <span className="text-gray-800">Ryan Petty</span>
             </h1>
