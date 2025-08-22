@@ -9,7 +9,7 @@ const ParallaxSection = ({ id, className = "", children }) => {
     <motion.section
       id={id}
       style={{ y }}
-      className={`w-full py-20 px-4 md:px-12`}
+      className={`w-full py-8 px-4 md:px-8`}
     >
       <div className={`max-w-7xl mx-auto ${className}`}>
         {children}
