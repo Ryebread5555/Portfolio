@@ -1,99 +1,118 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useThemeContext } from '../hooks/useThemeContext';
 import useMediaQuery from '../hooks/useMediaQuery';
 import { FaBars, FaTimes } from 'react-icons/fa';
 
-function NavBar({ handlePageChange }) {
+function NavBar({ topOfPage, activePage, setActivePage }) {
   const tabs = ['About', 'Projects', 'Resume', 'Contact'];
-  const [activeTab, setActiveTab] = useState('About');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { darkMode, toggleTheme } = useThemeContext();
   const isDesktop = useMediaQuery('(min-width: 768px)');
 
   const handleNavClick = (tab) => {
-    setActiveTab(tab);
-    handlePageChange(tab);
+    setActivePage(tab.toLowerCase());
     setIsMenuOpen(false);
   };
 
+  // Add effect to handle body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen && !isDesktop) {
+      // Prevent body scroll when mobile menu is open
+      document.body.style.overflow = 'hidden';
+    } else {
+      // Restore body scroll when mobile menu is closed
+      document.body.style.overflow = 'unset';
+    }
+
+    // Cleanup function to restore scroll when component unmounts
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isMenuOpen, isDesktop]);
+
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full z-50 backdrop-blur-md transition duration-300 border-b ${
-        darkMode
-          ? 'bg-black/60 text-white border-white/20'
-          : 'bg-white/60 text-gray-900 border-gray-200'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between h-28 relative">
-        {/* Left: Logo */}
-        <div className="text-[72px] font-bold font-montserrat">RP</div>
+    <>
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 transition duration-300 ${
+          topOfPage
+            ? 'bg-gray-200'
+            : 'bg-gray-200/90 backdrop-blur-sm'
+        }`}
+      >
+        {/* Responsive navbar height - smaller on mobile */}
+        <div className="w-full px-4 md:px-6 flex items-center justify-between h-20 md:h-32 lg:h-48">
+          {/* Left: Logo - Responsive sizing */}
+          <div className="text-3xl md:text-6xl lg:text-9xl xl:text-[10rem] font-bold text-gray-800 font-serif">RP</div>
 
-        {/* Center: Tabs (desktop) OR Hamburger (mobile) */}
-        <div className="absolute left-1/2 transform -translate-x-1/2">
+          {/* Center: Tabs (desktop) OR Hamburger/Close Button (mobile) */}
           {isDesktop ? (
-            <ul className="flex space-x-[6rem] text-[32px] font-bold font-montserrat tracking-wide">
-              {tabs.map((tab) => (
-                <li key={tab}>
-                  <a
-                    href={`#${tab.toLowerCase()}`}
-                    onClick={() => handleNavClick(tab)}
-                    className={`px-4 py-2 transition-all duration-200 ${
-                      activeTab === tab
-                        ? 'text-blue-600'
-                        : 'hover:text-blue-500'
-                    }`}
-                  >
-                    {tab}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-6xl p-5 rounded-full hover:bg-white/30 transition"
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <FaTimes /> : <FaBars />}
-            </button>
-          )}
-        </div>
-
-        {/* Right: Theme Toggle with Glow and Icons */}
-        <div className="flex items-center pr-2 sm:pr-4 md:pr-6 lg:pr-8">
-          <label className="relative inline-flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              className="sr-only peer"
-              checked={darkMode}
-              onChange={toggleTheme}
-            />
-            {/* Switch Track with Glow */}
-            <div className="w-16 h-9 bg-gray-300 dark:bg-gray-700 rounded-full transition-colors duration-300 shadow-[0_0_8px_rgba(0,0,0,0.3)] peer-checked:shadow-[0_0_10px_rgba(59,130,246,0.6)] flex items-center justify-center px-1">
-              <span className="text-xl">
-                {darkMode ? '🌙' : '🌞'}
-              </span>
+            <div className="flex-1 flex justify-center">
+              <ul className="flex space-x-4 md:space-x-6 text-xl md:text-2xl font-bold font-montserrat tracking-wide">
+                {tabs.map((tab) => (
+                  <li key={tab}>
+                    <a
+                      href={`#${tab.toLowerCase()}`}
+                      onClick={() => handleNavClick(tab)}
+                      className={`px-2 md:px-3 py-2 transition-all duration-200 whitespace-nowrap text-gray-800 hover:text-blue-600 ${
+                        activePage === tab.toLowerCase()
+                          ? 'text-blue-600 underline'
+                          : ''
+                      }`}
+                    >
+                      {tab}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-            {/* Sliding Circle */}
-            <div className="absolute top-1 left-1 w-7 h-7 bg-white rounded-full transition-transform duration-300 transform peer-checked:translate-x-7 shadow-md" />
-          </label>
-        </div>
-      </div>
+          ) : (
+            <div className="flex-1 flex justify-center">
+              <button
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                className="text-4xl md:text-6xl lg:text-8xl p-2 md:p-4 text-gray-800 hover:text-blue-600 transition-colors z-50"
+                aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+              >
+                {isMenuOpen ? <FaTimes /> : <FaBars />}
+              </button>
+            </div>
+          )}
 
-      {/* Mobile Fullscreen Menu */}
+          {/* Right: Theme Toggle - Responsive sizing */}
+          <div className="flex items-center flex-shrink-0">
+            <button
+              onClick={toggleTheme}
+              className="w-16 h-8 md:w-24 md:h-12 lg:w-32 lg:h-16 xl:w-40 xl:h-20 bg-gray-600 rounded-full relative transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              aria-label="Toggle theme"
+            >
+              {/* Sliding circle - Responsive sizing */}
+              <div 
+                className={`absolute top-1 md:top-1.5 lg:top-2 w-6 h-6 md:w-8 md:h-8 lg:w-12 lg:h-12 xl:w-16 xl:h-16 bg-white rounded-full shadow-md transition-transform duration-300 ${
+                  darkMode 
+                    ? 'translate-x-8 md:translate-x-12 lg:translate-x-16 xl:translate-x-20' 
+                    : 'translate-x-0.5 md:translate-x-1 lg:translate-x-1.5'
+                }`}
+              />
+              {/* Icons - Responsive sizing */}
+              <div className="absolute inset-0 flex items-center justify-between px-1 md:px-2 lg:px-3 xl:px-4">
+                <span className="text-sm md:text-base lg:text-lg xl:text-2xl">🌞</span>
+                <span className="text-sm md:text-base lg:text-lg xl:text-2xl">🌙</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Fullscreen Menu - Rendered outside nav for full viewport coverage */}
       {!isDesktop && isMenuOpen && (
-        <div
-          className={`md:hidden fixed inset-0 flex flex-col items-center justify-center space-y-10 text-[32px] font-bold font-montserrat ${
-            darkMode ? 'bg-black/90 text-white' : 'bg-white/95 text-gray-900'
-          }`}
-        >
+        <div className="md:hidden fixed inset-0 bg-gray-200/95 backdrop-blur-sm flex flex-col items-center justify-center space-y-8 text-2xl font-medium text-gray-800 z-40">
+          {/* Navigation Links */}
           {tabs.map((tab) => (
             <a
               key={tab}
               href={`#${tab.toLowerCase()}`}
               onClick={() => handleNavClick(tab)}
-              className={`hover:text-blue-500 ${
-                activeTab === tab ? 'text-blue-600' : ''
+              className={`hover:text-blue-600 transition-colors ${
+                activePage === tab.toLowerCase() ? 'text-blue-600 underline' : ''
               }`}
             >
               {tab}
@@ -101,7 +120,7 @@ function NavBar({ handlePageChange }) {
           ))}
         </div>
       )}
-    </nav>
+    </>
   );
 }
 
