@@ -34,7 +34,6 @@ const About = () => {
           justifyContent: 'space-between',
           gap: isDesktop ? '64px' : '24px',
           minHeight: '100vh',
-          backgroundColor: 'lightblue',
           padding: '16px',
           transition: 'all 0.3s ease-in-out'
         }}
