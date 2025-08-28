@@ -15,3 +15,18 @@ body,
 .app {
   height: 100%;
 }
+
+/* Dark mode styles */
+.dark {
+  background-color: #111827; /* bg-gray-900 */
+  color: #f9fafb; /* text-gray-50 */
+}
+
+.dark body {
+  background-color: #111827;
+  color: #f9fafb;
+}
+
+.dark #root {
+  background-color: #111827;
+}
