@@ -36,20 +36,28 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
       <nav
         className={`fixed top-0 left-0 w-full z-50 transition duration-300 ${
           topOfPage && !isMenuOpen
-            ? 'bg-transparent'
-            : 'bg-gray-300'
+            ? darkMode 
+              ? 'bg-transparent'
+              : 'bg-transparent'
+            : darkMode
+              ? 'bg-gray-800'
+              : 'bg-gray-300'
         }`}
       >
         {/* Responsive navbar height - smaller on mobile */}
         <div className="w-full px-4 md:px-6 flex items-center justify-between h-16 md:h-20 lg:h-24">
           {/* Left: Logo - Responsive sizing */}
-          <div className="text-3xl font-bold text-gray-800 font-serif md:block hidden">
+          <div className={`text-3xl font-bold font-serif md:block hidden ${
+            darkMode ? 'text-white' : 'text-gray-800'
+          }`}>
             <button
               onClick={() => window.location.href = '/'}
-              className="hover:text-blue-600 transition-colors cursor-pointer"
+              className={`hover:text-blue-600 transition-colors cursor-pointer hover:cursor-pointer ${
+                darkMode ? 'text-white' : 'text-gray-800'
+              }`}
               aria-label="Go to homepage"
             >
-              RP
+              Ryan Petty
             </button>
           </div>
 
@@ -62,15 +70,15 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
                     <a
                       href={`#${tab.toLowerCase()}`}
                       onClick={() => handleNavClick(tab)}
-                      className={`px-2 md:px-3 py-2 transition-all duration-200 whitespace-nowrap text-gray-800 hover:text-blue-600 ${
+                      className={`px-2 md:px-3 py-2 transition-all duration-200 whitespace-nowrap hover:text-blue-600 ${
                         activePage === tab.toLowerCase()
                           ? 'text-blue-600 underline'
-                          : ''
+                          : darkMode ? 'text-white' : 'text-gray-800'
                       }`}
                     >
                       {tab}
                     </a>
-                    {/* Add separator line between items (except after the last one) */}
+                    {/* Add separator line between items */}
                     {index < tabs.length - 1 && (
                       <div className="w-px h-6 bg-gray-400 mx-4"></div>
                     )}
@@ -81,10 +89,14 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
           ) : (
             <div className="flex-1 flex justify-center">
               {/* Mobile: RP logo in center - positioned absolutely */}
-              <div className="text-3xl font-bold text-gray-800 font-serif md:hidden absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
+              <div className={`text-3xl font-bold font-serif md:hidden absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
+                darkMode ? 'text-white' : 'text-gray-800'
+              }`}>
                 <button
                   onClick={() => window.location.href = '/'}
-                  className="hover:text-blue-600 transition-colors cursor-pointer"
+                  className={`hover:text-blue-600 transition-colors cursor-pointer ${
+                    darkMode ? 'text-white' : 'text-gray-800'
+                  }`}
                   aria-label="Go to homepage"
                 >
                   RP
@@ -99,7 +111,11 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
             {!isDesktop && (
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="text-2xl md:text-3xl lg:text-4xl p-2 md:p-3 text-gray-800 hover:text-blue-600 transition-colors z-50 md:hidden absolute left-4"
+                className={`text-2xl md:text-3xl lg:text-4xl p-2 md:p-3 transition-colors z-50 md:hidden absolute left-4 ${
+                  darkMode 
+                    ? 'text-white hover:text-blue-400' 
+                    : 'text-gray-800 hover:text-blue-600'
+                }`}
                 aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               >
                 {isMenuOpen ? <FaTimes /> : <FaBars />}
@@ -130,23 +146,25 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
             
             <button
               onClick={toggleTheme}
-              className="w-16 h-8 bg-gray-600 rounded-full relative transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className={`w-16 h-8 rounded-full relative transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                darkMode ? 'bg-white' : 'bg-gray-800'
+              }`}
               aria-label="Toggle theme"
             >
-              {/* Sliding circle - Responsive sizing */}
+              {/* Sliding circle with icon inside */}
               <div 
-                className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-md transition-transform duration-300 ${
+                className={`absolute top-1 w-6 h-6 rounded-full shadow-md transition-transform duration-300 flex items-center justify-center ${
                   darkMode 
-                    ? 'translate-x-8' 
-                    : 'translate-x-0.5'
+                    ? 'translate-x-8 bg-gray-800' 
+                    : 'translate-x-0.5 bg-white'
                 }`}
-              />
-              {/* Icons - Responsive sizing */}
-              <div className="absolute inset-0 flex items-center justify-between px-1">
-                <span className="text-sm">🌞</span>
-                <span className="text-sm">🌙</span>
+              >
+                <span className="text-xs">
+                  {darkMode ? '✨🌙' : '☀️'}
+                </span>
               </div>
             </button>
+            
           </div>
         </div>
       </nav>
@@ -154,10 +172,14 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
       {/* Mobile Fullscreen Menu - Rendered outside nav for full viewport coverage */}
       {!isDesktop && (
         <div 
-          className={`md:hidden fixed inset-0 bg-gray-200/95 backdrop-blur-sm flex flex-col items-start justify-start space-y-8 text-2xl font-medium text-gray-800 z-40 transition-transform duration-300 pt-32 pl-8 ${
+          className={`md:hidden fixed inset-0 flex flex-col items-start justify-start space-y-8 text-2xl font-medium z-40 transition-transform duration-300 pt-32 pl-8 ${
             isMenuOpen 
               ? 'transform translate-x-0' 
               : 'transform -translate-x-full'
+          } ${
+            darkMode 
+              ? 'bg-gray-900/95 backdrop-blur-sm text-white' 
+              : 'bg-gray-200/95 backdrop-blur-sm text-gray-800'
           }`}
         >
           {/* Navigation Links */}
