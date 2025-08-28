@@ -4,10 +4,12 @@ import Contact from './Contact';
 import NavBar from './NavBar';
 import Projects from './Projects';
 import Resume from './Resume';
+import { useThemeContext } from '../hooks/useThemeContext';
 
 const AppContainer = () => {
   const [activePage, setActivePage] = useState('about');
   const [topOfPage, setTopOfPage] = useState(true);
+  const { darkMode } = useThemeContext();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,7 +21,9 @@ const AppContainer = () => {
   }, []);
 
   return (
-    <div className="overflow-x-hidden scroll-smooth">
+    <div className={`overflow-x-hidden scroll-smooth transition-colors duration-300 ${
+      darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'
+    }`}>
       <NavBar
         topOfPage={topOfPage}
         activePage={activePage}
