@@ -128,7 +128,9 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
                 href="https://www.linkedin.com/in/ryan-petty-23991b199/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-800 hover:text-blue-600 transition-colors"
+                className={`transition-colors ${
+                  darkMode ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'
+                }`}
                 aria-label="LinkedIn Profile"
               >
                 <FaLinkedin className="text-2xl md:text-3xl lg:text-4xl" />
@@ -137,7 +139,9 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
                 href="https://github.com/Ryebread5555"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-800 hover:text-blue-600 transition-colors"
+                className={`transition-colors ${
+                  darkMode ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'
+                }`}
                 aria-label="GitHub Profile"
               >
                 <FaGithub className="text-2xl md:text-3xl lg:text-4xl" />
@@ -202,7 +206,9 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
               href="https://www.linkedin.com/in/ryan-petty-23991b199/"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 hover:text-blue-600 transition-colors"
+              className={`transition-colors ${
+                darkMode ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'
+              }`}
               aria-label="LinkedIn Profile"
             >
               <FaLinkedin className="text-4xl" />
@@ -211,7 +217,9 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
               href="https://github.com/Ryebread5555"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-800 hover:text-blue-600 transition-colors"
+              className={`transition-colors ${
+                darkMode ? 'text-white hover:text-blue-400' : 'text-gray-800 hover:text-blue-600'
+              }`}
               aria-label="GitHub Profile"
             >
               <FaGithub className="text-4xl" />
