@@ -66,11 +66,11 @@ const About = () => {
             src={profilePic}
             className="w-24 sm:w-28 md:w-32 lg:w-36 xl:w-40 h-40 sm:h-48 md:h-56 lg:h-64 xl:h-72 rounded-2xl shadow-2xl object-cover border-4 border-red-500"
             style={{
-              width: '320px',
+              width: isDesktop ? '400px' : '320px',
               height: '533px',
-              minWidth: '320px',
+              minWidth: isDesktop ? '400px' : '320px',
               minHeight: '533px',
-              maxWidth: '320px',
+              maxWidth: isDesktop ? '400px' : '320px',
               maxHeight: '533px'
             }}
           />
@@ -114,12 +114,9 @@ const About = () => {
           <div 
             className="bg-white rounded-2xl shadow-xl p-4 sm:p-6 lg:p-8 border border-gray-100 mx-auto lg:mx-0"
             style={{
-              width: isDesktop ? '320px' : '280px',
-              height: isDesktop ? '320px' : '280px',
+              width: isDesktop ? 'auto' : '280px',
               minWidth: isDesktop ? '320px' : '280px',
-              minHeight: isDesktop ? '320px' : '280px',
-              maxWidth: isDesktop ? '320px' : '280px',
-              maxHeight: isDesktop ? '320px' : '280px',
+              maxWidth: isDesktop ? '400px' : '280px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
@@ -147,10 +144,10 @@ const About = () => {
                 Message
               </a>
               <a
-                href="mailto:your-email@example.com"
-                className="bg-gold text-white font-semibold px-6 py-3 rounded-lg hover:bg-gold/90 hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-md text-center transform text-sm w-32 mx-auto lg:mx-auto"
+                href="mailto:ryanpetty.dev@gmail.com"
+                className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 hover:scale-105 hover:shadow-lg transition-all duration-300 shadow-md text-center transform text-sm w-32 mx-auto lg:mx-auto"
               >
-                Email
+                Email Me
               </a>
             </div>
           </div>
