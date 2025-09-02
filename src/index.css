@@ -8,6 +8,12 @@
 html, body {
   overflow-x: hidden;
   font-family: 'Montserrat', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Ensure page starts at top on refresh */
+html {
+  scroll-padding-top: 0;
 }
 
 body,
@@ -29,4 +35,14 @@ body,
 
 .dark #root {
   background-color: #111827;
+}
+
+/* Shooting stars enhancements */
+.shooting-star {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8));
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
