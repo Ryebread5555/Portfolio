@@ -71,9 +71,7 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
                       href={`#${tab.toLowerCase()}`}
                       onClick={() => handleNavClick(tab)}
                       className={`px-2 md:px-3 py-2 transition-all duration-200 whitespace-nowrap hover:text-blue-600 ${
-                        activePage === tab.toLowerCase()
-                          ? 'text-blue-600 underline'
-                          : darkMode ? 'text-white' : 'text-gray-800'
+                        darkMode ? 'text-white' : 'text-gray-800'
                       }`}
                     >
                       {tab}
@@ -164,7 +162,7 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
                 }`}
               >
                 <span className="text-xs">
-                  {darkMode ? '✨🌙' : '☀️'}
+                  {darkMode ? '🌙' : '☀️'}
                 </span>
               </div>
             </button>
@@ -193,7 +191,7 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
               href={`#${tab.toLowerCase()}`}
               onClick={() => handleNavClick(tab)}
               className={`hover:text-blue-600 transition-colors ${
-                activePage === tab.toLowerCase() ? 'text-blue-600 underline' : ''
+                darkMode ? 'text-white' : 'text-gray-800'
               }`}
             >
               {tab}
