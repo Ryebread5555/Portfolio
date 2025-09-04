@@ -82,18 +82,29 @@ const container = {
 const Projects = () => {
   return (
     <ParallaxSection id="projects">
-  <motion.div
-    variants={container}
-    initial="hidden"
-    whileInView="visible"
-    viewport={{ once: true }}
-    className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-  >
-    {projects.map((project) => (
-      <ProjectCard key={project.id} {...project} />
-    ))}
-  </motion.div>
-</ParallaxSection>
+      <div className="flex flex-col items-center justify-center min-h-[20vh] mb-6">
+        <motion.h1 
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          Projects
+        </motion.h1>
+      </div>
+      <motion.div
+        variants={container}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+        className="max-w-7xl mx-auto px-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+      >
+        {projects.map((project) => (
+          <ProjectCard key={project.id} {...project} />
+        ))}
+      </motion.div>
+    </ParallaxSection>
   );
 };
 
