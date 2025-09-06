@@ -194,37 +194,6 @@ const ShootingStars = () => {
               }}
             />
             
-            {/* Simple Comet Trail */}
-            <motion.div
-              className="absolute rounded-full"
-              style={{
-                left: comet.x,
-                top: comet.y,
-                width: '2px',
-                height: '20px',
-                background: `linear-gradient(to bottom, ${comet.color}, transparent)`,
-                transform: 'rotate(45deg)',
-              }}
-              initial={{
-                opacity: 0,
-                scale: 0,
-                x: 0,
-                y: 0,
-              }}
-              animate={{
-                opacity: [0, 0.7, 0.7, 0],
-                scale: [0, 1, 1, 0],
-                x: [0, comet.endX - comet.x],
-                y: [0, comet.endY - comet.y],
-              }}
-              transition={{
-                duration: comet.duration,
-                delay: comet.delay + 0.1,
-                ease: "easeOut",
-                repeat: Infinity,
-                repeatDelay: 15,
-              }}
-            />
           </div>
         ))}
       </AnimatePresence>
