@@ -51,7 +51,7 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
             darkMode ? 'text-white' : 'text-gray-800'
           }`}>
             <button
-              onClick={() => window.location.href = '/'}
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className={`hover:text-blue-600 transition-colors cursor-pointer hover:cursor-pointer ${
                 darkMode ? 'text-white' : 'text-gray-800'
               }`}
@@ -91,7 +91,7 @@ function NavBar({ topOfPage, activePage, setActivePage }) {
                 darkMode ? 'text-white' : 'text-gray-800'
               }`}>
                 <button
-                  onClick={() => window.location.href = '/'}
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                   className={`hover:text-blue-600 transition-colors cursor-pointer ${
                     darkMode ? 'text-white' : 'text-gray-800'
                   }`}
