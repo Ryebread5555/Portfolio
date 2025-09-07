@@ -21,12 +21,12 @@ export const ThemeProvider = ({ children }) => {
   const updateFavicon = (isDark) => {
     const favicon = document.querySelector('link[rel="icon"]');
     if (favicon) {
-      favicon.href = isDark ? '/favicon-dark.ico' : '/favicon-light.ico';
+      favicon.href = isDark ? '/Portfolio/favicon-dark.ico' : '/Portfolio/favicon-light.ico';
     } else {
       // Create favicon link if it doesn't exist
       const link = document.createElement('link');
       link.rel = 'icon';
-      link.href = isDark ? '/favicon-dark.ico' : '/favicon-light.ico';
+      link.href = isDark ? '/Portfolio/favicon-dark.ico' : '/Portfolio/favicon-light.ico';
       document.head.appendChild(link);
     }
   };
